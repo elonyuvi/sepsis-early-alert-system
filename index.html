@@ -8,13 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- This HTML file generates a comprehensive digital business poster for the Sepsis Early Alert System. -->
-    <!-- The layout is a responsive two-column grid, simulating an A3 vertical format. This design is chosen for professional clarity and visual flow. -->
-    <!-- All content is pulled directly from the user's prompt, including the new team section and specific project details. -->
-    <!-- The design uses a clean, medical-tech color palette (teal, blue, white) and modern typography from the Inter font. -->
-    <!-- Icons are included as inline SVGs for a clean, fast-loading, and scalable visual presentation without external dependencies beyond Tailwind CSS. -->
-    
+
+    <!-- This HTML file creates a digital business poster with an interactive table of contents. -->
+    <!-- The first part of the poster (up to the team members) is static. -->
+    <!-- The subsequent sections are hidden by default and can be revealed by clicking on a heading from the list. -->
+    <!-- This creates a clean, focused user experience for navigating the poster's content. -->
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -23,7 +22,6 @@
         .poster-container {
             max-width: 842px; /* A3 vertical width in a common digital equivalent */
             margin: 0 auto;
-            min-height: 1190px; /* A3 vertical height */
             background-color: #ffffff;
             padding: 3rem;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -34,172 +32,301 @@
             height: 28px;
             margin-right: 0.75rem;
         }
+        .interactive-heading {
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            user-select: none;
+        }
+        .interactive-heading:hover {
+            transform: translateX(5px);
+            color: #0ea5e9; /* sky-500 */
+        }
+        .content-section {
+            display: none; /* Hide all content sections by default */
+        }
+        .content-section.active {
+            display: block; /* Show the active section */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="text-slate-700">
 
     <main class="poster-container">
 
+        <!-- Static Header Section (Visible by default) -->
+
         <!-- University Logo and Info -->
         <div class="text-center mb-8">
-            <img src="https://placehold.co/800x120/ffffff/1e40af?text=KALASALINGAM+ACADEMY+OF+RESEARCH+AND+EDUCATION" alt="Kalasalingam Academy of Research and Education" class="mx-auto w-full max-w-2xl h-auto rounded-lg">
+            <img src="https://www.kalasalingam.ac.in/wp-content/uploads/2022/02/Logo.png" alt="Kalasalingam Academy of Research and Education" class="mx-auto w-full max-w-2xl h-auto rounded-lg" onerror="this.onerror=null;this.src='https://placehold.co/800x120/ffffff/1e40af?text=KALASALINGAM+ACADEMY+OF+RESEARCH+AND+EDUCATION';">
+        </div>
+
+        <!-- Section with school, department, and assignment details -->
+        <!-- The color of this text has been changed from red to a dark slate color. -->
+        <div class="text-center mb-8 font-bold text-slate-800 space-y-1">
+            <p class="text-xl">SCHOOL OF ELECTRONICS, ELECTRICAL AND BIOMEDICAL TECHNOLOGY</p>
+            <p class="text-xl">DEPARTMENT OF BIOMEDICAL ENGINEERING</p>
+            <p class="text-lg">MEDICAL DEVICE MARKETING (213BME2127)</p>
+            <p class="text-lg">ASSIGNMENT – 1</p>
+            <p class="text-lg">Healthcare Startup Canvas – Build Your Own Business Blueprint</p>
         </div>
 
         <!-- Header -->
-        <header class="text-center mb-8">
+        <header class="text-center mb-4">
             <h1 class="text-5xl font-bold text-slate-800 tracking-tight">Sepsis: Early Alert System</h1>
             <p class="text-2xl mt-2 text-sky-600 font-semibold">"Detect Early. Save Lives."</p>
+        </header>
+
+        <!-- Section for Guided by and Team Members -->
+        <div class="grid grid-cols-2 gap-4 mb-8 text-sm font-semibold text-slate-600">
+            <div class="text-left">
+                <p>Guided by,</p>
+                <p>Dr. S. Sakthivel,</p>
+                <p>Associate Professor,</p>
+                <p>BME</p>
+            </div>
+            <div class="text-right">
+                <p>Team Members</p>
+                <ul class="list-none text-right">
+                    <li>S Yuvaraj (9922020030)</li>
+                    <li>A T Abishek Raj (9922020044)</li>
+                    <li>A Afsar Jameel (9922020009)</li>
+                    <li>M Barathsuriya (9922020050)</li>
+                    <li>P L Subramanian (9922020006)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="text-center mb-8">
             <p class="mt-4 text-sm text-slate-500">
                 <span class="font-semibold text-sky-700">Patent Published</span> — 📄 App. No: 202541046687 (Filed: 15 May 2025, Published: 13 Jun 2025)
             </p>
-        </header>
-
-        <div class="grid md:grid-cols-2 gap-8">
+        </div>
+        
+        <!-- Interactive Section Starts Here -->
+        <!-- This is a list of all headings. Clicking on one will show its content below. -->
+        <div class="p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500 mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 mb-4">Click a Heading to View Details</h2>
+            <ul class="list-disc list-inside space-y-2 font-semibold text-slate-600">
+                <li class="interactive-heading" onclick="showSection('problem')">Problem Statement & Customer Segments</li>
+                <li class="interactive-heading" onclick="showSection('value')">Unique Value Proposition</li>
+                <li class="interactive-heading" onclick="showSection('metrics')">Key Metrics (Decision Cycle)</li>
+                <li class="interactive-heading" onclick="showSection('channels')">Channels (Reaching Healthcare Buyers)</li>
+                <li class="interactive-heading" onclick="showSection('revenue')">Revenue Streams</li>
+                <li class="interactive-heading" onclick="showSection('cost')">Cost Structure</li>
+                <li class="interactive-heading" onclick="showSection('legal')">Legal & Regulatory Constraints</li>
+                <li class="interactive-heading" onclick="showSection('milestones')">Stage Gate Milestones</li>
+                <li class="interactive-heading" onclick="showSection('video')">Project Video</li>
+                <li class="interactive-heading" onclick="showSection('prototype')">Prototype Image</li>
+                <li class="interactive-heading" onclick="showSection('block-diagram')">Block Diagram</li>
+                <li class="interactive-heading" onclick="showSection('website-front')">Website Front Page</li>
+                <li class="interactive-heading" onclick="showSection('output')">Output</li>
+                <li class="interactive-heading" onclick="showSection('patient-readings')">Patient Readings</li>
+            </ul>
+        </div>
+        
+        <!-- The content blocks are initially hidden and will be shown based on user clicks -->
+        <div class="space-y-8">
             
-            <!-- About Sepsis & Solution -->
-            <div class="p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+            <!-- Problem Statement & Customer Segments -->
+            <div id="problem" class="content-section p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
                 <div class="flex items-center mb-3">
-                    <!-- Icon for About Sepsis -->
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-pulse"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4 2-7 1.5 3H21"/></svg>
-                    <h2 class="text-2xl font-bold text-slate-800">About Sepsis & Solution</h2>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Problem Statement & Customer Segments</h2>
                 </div>
-                <ul class="space-y-2 text-slate-600">
-                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>Sepsis is a life-threatening reaction to infection — early detection saves lives.</li>
-                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>Low-cost IoT-based wearable monitors vital signs: Heart Rate, Temperature, $SpO_2$, Respiration.</li>
-                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>Sends instant alerts to doctors/caretakers via app + offline LCD display.</li>
-                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>Includes a simple patient record & awareness web dashboard.</li>
-                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>Future integration: WBC monitoring.</li>
-                </ul>
-            </div>
-
-            <!-- Problem & Target Users -->
-            <div class="p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
-                <div class="flex items-center mb-3">
-                    <!-- Icon for Problem -->
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-x"><path d="M2.5 21a8.964 8.964 0 0 1 12.5-4.4M16 19l6-6M22 19l-6-6"/><circle cx="10" cy="8" r="5"/></svg>
-                    <h2 class="text-2xl font-bold text-slate-800">Problem & Target Users</h2>
-                </div>
-                <p class="text-slate-600 mb-4">Rural healthcare lacks affordable real-time sepsis detection.</p>
-                <h3 class="font-semibold text-lg text-sky-600 mb-2">Target Users:</h3>
+                <p class="text-slate-600 mb-4">Sepsis kills millions because it is detected too late, especially in rural areas without advanced hospitals.</p>
+                <h3 class="font-semibold text-lg text-sky-600 mb-2">Customers:</h3>
                 <ul class="list-disc list-inside text-slate-600 space-y-1">
-                    <li>Primary Health Centres</li>
-                    <li>Small Hospitals</li>
+                    <li>Primary health centres</li>
+                    <li>Small hospitals</li>
                     <li>Home-care providers</li>
-                    <li>Ambulance & Telemedicine</li>
+                    <li>Ambulance & telemedicine services</li>
                 </ul>
             </div>
 
             <!-- Unique Value Proposition -->
-            <div class="p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+            <div id="value" class="content-section p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
                 <div class="flex items-center mb-3">
-                    <!-- Icon for Value Proposition -->
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17.76 20l-5.76-1.728L6.24 20l2.283-7.11L2 9h7Z"/></svg>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M10.2 14a.2.2 0 0 1-.2-.2c0-.1.1-.2.2-.2.1 0 .2.1.2.2 0 .1-.1.2-.2.2Z"/></svg>
                     <h2 class="text-2xl font-bold text-slate-800">Unique Value Proposition</h2>
                 </div>
-                <ul class="space-y-2 text-slate-600">
-                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check-circle text-teal-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.15"/><path d="m22 4-7 7-4-4"/></svg>All-in-one, low-cost, multi-parameter detection device.</li>
-                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check-circle text-teal-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.15"/><path d="m22 4-7 7-4-4"/></svg>Works both online & offline.</li>
-                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check-circle text-teal-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-8.15"/><path d="m22 4-7 7-4-4"/></svg>Easily accessible for low-resource settings.</li>
+                <p class="text-slate-600">A low-cost, device that monitors multiple vital signs (HR, Temp, SpO2, BP) in real time and sends alerts via app + offline LCD display. Designed for low-resource settings and can be upgraded with WBC monitoring.</p>
+            </div>
+
+            <!-- Key Metrics (Decision Cycle) -->
+            <div id="metrics" class="content-section p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+                <div class="flex items-center mb-3">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Key Metrics (Decision Cycle)</h2>
+                </div>
+                <ul class="list-disc list-inside text-slate-600 space-y-1">
+                    <li>Detection-to-alert time: under 1 minute</li>
+                    <li>Device cost: ~₹1200</li>
+                    <li>Selling price: ₹15000–₹1800</li>
+                    <li>Pilot tests done with students & workers</li>
+                    <li>Early warning gives doctors more time to act, improving survival rates</li>
+                </ul>
+            </div>
+            <!-- Channels (Reaching Healthcare Buyers) -->
+            <div id="channels" class="content-section p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+                <div class="flex items-center mb-3">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Channels (Reaching Healthcare Buyers)</h2>
+                </div>
+                <ul class="list-disc list-inside text-slate-600 space-y-1">
+                    <li>Pilot programs in PHCs and hospitals</li>
+                    <li>Medical expos & health conferences</li>
+                    <li>Partnerships with NGOs and CSR programs</li>
+                    <li>Government health missions</li>
                 </ul>
             </div>
 
-            <!-- Key Metrics & Channels -->
-            <div class="p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+            <!-- Revenue Streams -->
+            <div id="revenue" class="content-section p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
                 <div class="flex items-center mb-3">
-                    <!-- Icon for Key Metrics -->
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bar-chart-2"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
-                    <h2 class="text-2xl font-bold text-slate-800">Key Metrics & Channels</h2>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-3m-18 0h18a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H3a2 2 0 0 1 0-4h18m-11-2v6"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Revenue Streams</h2>
                 </div>
-                <div class="mb-6">
-                    <h3 class="font-semibold text-lg text-sky-600 mb-2">Key Metrics:</h3>
-                    <ul class="list-disc list-inside text-slate-600 space-y-1">
-                        <li>Detection-to-alert time: <1 min</li>
-                        <li>Pilot-tested with students & workers</li>
-                        <li>Cost to produce: ~₹700 | Selling price: ₹1000–₹1200</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-lg text-sky-600 mb-2">Channels:</h3>
-                    <ul class="list-disc list-inside text-slate-600 space-y-1">
-                        <li>Direct pilots with PHCs & hospitals</li>
-                        <li>NGO & government partnerships</li>
-                        <li>Medical expos & academic networks</li>
-                    </ul>
-                </div>
+                <ul class="list-disc list-inside text-slate-600 space-y-1">
+                    <li>Direct device sales</li>
+                    <li>Subscription for app & dashboard use</li>
+                    <li>Annual Maintenance Contracts (AMC)</li>
+                    <li>Government/CSR bulk orders</li>
+                </ul>
             </div>
 
-            <!-- Revenue Streams & Cost Structure -->
-            <div class="p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+            <!-- Cost Structure -->
+            <div id="cost" class="content-section p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
                 <div class="flex items-center mb-3">
-                    <!-- Icon for Revenue -->
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-indian-rupee"><path d="M6 3h12"/><path d="M6 8h12"/><path d="m6 13 8.5 8"/><path d="M6 13h3m2 0h12"/></svg>
-                    <h2 class="text-2xl font-bold text-slate-800">Revenue & Costs</h2>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="8" x2="16" y1="10" y2="10"/><line x1="8" x2="16" y1="14" y2="14"/><line x1="8" x2="16" y1="18" y2="18"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Cost Structure</h2>
                 </div>
-                <div class="mb-6">
-                    <h3 class="font-semibold text-lg text-sky-600 mb-2">Revenue Streams:</h3>
-                    <ul class="list-disc list-inside text-slate-600 space-y-1">
-                        <li>Device sales</li>
-                        <li>Subscription for app & dashboard</li>
-                        <li>AMC contracts</li>
-                        <li>CSR/government procurement</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-lg text-sky-600 mb-2">Cost Structure:</h3>
-                    <p class="text-slate-600">This project focuses on a lean cost structure to ensure affordability. Primary costs are for materials, manufacturing, and R&D. Minimal overhead allows for competitive pricing and a sustainable business model.</p>
-                </div>
+                <ul class="list-disc list-inside text-slate-600 space-y-1">
+                    <li>Hardware components: sensors, microcontroller, LCD, battery</li>
+                    <li>Software & app development</li>
+                    <li>Manufacturing & assembly</li>
+                    <li>Marketing & training programs</li>
+                </ul>
             </div>
 
-            <!-- Roadmap & Legal -->
-            <div class="p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+            <!-- Legal & Regulatory Constraints -->
+            <div id="legal" class="content-section p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
                 <div class="flex items-center mb-3">
-                    <!-- Icon for Roadmap -->
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-route"><path d="M3 3h3l7.04 15.61A2 2 0 0 0 14.88 20h5.24a2 2 0 0 0 1.93-2.58l-1.3-6.49A2 2 0 0 0 18.17 9H9.25a2 2 0 0 1-1.92-2.58L9.5 2"/></svg>
-                    <h2 class="text-2xl font-bold text-slate-800">Roadmap & Legal</h2>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gavel"><path d="M14.5 12.5 11 9 12 8 15.5 11.5c.6.6.9 1.4.9 2.3v3.5L22 22"/><path d="M20.5 7.5l-2 2a2.85 2.85 0 0 1-4 0c-.8-.8-.8-2-.1-2.8l2-2c1.1-1.1 3.2-1.1 4.3 0 1-.9 3.2-.8 4.3.2L23 5"/><path d="M4 15c-1.6 0-3 1.5-3 3s1.4 3 3 3h2l-2.5-2.5L4 15Z"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Legal & Regulatory Constraints</h2>
                 </div>
-                <div class="mb-6">
-                    <h3 class="font-semibold text-lg text-sky-600 mb-2">Roadmap:</h3>
-                    <ul class="list-disc list-inside text-slate-600 space-y-1">
-                        <li>Prototype completed ✅</li>
-                        <li>Patent published ✅</li>
-                        <li>Pilot trials — Q4 2025</li>
-                        <li>WBC integration — 2026</li>
-                        <li>Commercial launch — 2026–2027</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-lg text-sky-600 mb-2">Legal & Regulatory:</h3>
-                    <p class="text-slate-600">The device is being designed to meet global standards, including **FDA** and **CE** approval. The software and data handling will comply with **HIPAA** and **GDPR** regulations.</p>
-                </div>
+                <ul class="list-disc list-inside text-slate-600 space-y-1">
+                    <li>Must follow medical device safety guidelines (BIS/ISO)</li>
+                    <li>Need medical device registration before large-scale sales</li>
+                    <li>Data privacy compliance for patient information</li>
+                </ul>
             </div>
 
-            <!-- Team & QR Code -->
-            <div class="p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+            <!-- Stage Gate Milestones -->
+            <div id="milestones" class="content-section p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
                 <div class="flex items-center mb-3">
-                    <!-- Icon for Team -->
-                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    <h2 class="text-2xl font-bold text-slate-800">The Team</h2>
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flag"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Stage Gate Milestones</h2>
                 </div>
-                <div class="text-sm text-slate-600 mb-4">
-                    <p class="font-semibold mb-2 text-base text-sky-600">Submitted to: Dr. S. Sakthivel Sankaran</p>
-                    <ul class="list-disc list-inside space-y-1">
-                        <li>Yuvaraj S (9922020030)</li>
-                        <li>Abishek Raj A T (9922020044)</li>
-                        <li>Afsar Jameel A (9922020009)</li>
-                        <li>Barathsuriya M (9922020050)</li>
-                        <li>Subramanian P L (9922020006)</li>
-                    </ul>
-                </div>
-                <div class="flex justify-center mt-6">
-                    <a href="#" class="block">
-                        <img src="https://placehold.co/120x120/e2e8f0/0d9488?text=QR+Code" alt="QR Code Placeholder" class="rounded-lg shadow-md">
-                    </a>
-                </div>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>Prototype ready ✅</li>
+                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>Patent published ✅</li>
+                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>Pilot trials — Q4 2025</li>
+                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>WBC monitoring integration — 2026</li>
+                    <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-1 mr-2 lucide lucide-check text-emerald-500"><path d="M20 6 9 17l-5-5"/></svg>Commercial launch — 2026–2027</li>
+                </ul>
             </div>
 
+            <!-- YouTube Video Section -->
+            <div id="video" class="content-section md:col-span-2 p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+                <div class="flex items-center mb-3">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-circle"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Project Video</h2>
+                </div>
+                <div class="relative pt-[56.25%] overflow-hidden rounded-lg shadow-inner">
+                    <iframe
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="https://www.youtube.com/embed/cLoUb3bcdBs"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                <p class="text-sm text-center mt-4 text-slate-500">Watch our project pitch and prototype demonstration.</p>
+            </div>
+
+            <!-- Prototype Image -->
+            <div id="prototype" class="content-section md:col-span-2 p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+                <div class="flex items-center mb-3">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 7v5h3"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Prototype Image</h2>
+                </div>
+                <img src="https://i.ibb.co/fYj3F3J6/prototypesepsis.jpg" alt="Sepsis Detection Prototype" class="w-full h-auto rounded-lg mt-4" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/e2e8f0/1e40af?text=Image+Not+Found';">
+            </div>
+
+            <!-- Block Diagram -->
+            <div id="block-diagram" class="content-section md:col-span-2 p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+                <div class="flex items-center mb-3">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                        <circle cx="9" cy="9" r="2"/>
+                        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                    </svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Block Diagram</h2>
+                </div>
+                <img src="https://i.ibb.co/Z1bcv6Rp/blockdiagramsepsis.jpg" alt="blockdiagramsepsis" class="w-full h-auto rounded-lg mt-4" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/e2e8f0/1e40af?text=Image+Not+Found';">
+            </div>
+            
+            <!-- Website Front Page Image -->
+            <div id="website-front" class="content-section md:col-span-2 p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+                <div class="flex items-center mb-3">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-monitor-dot"><circle cx="12" cy="12" r="1"/><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Website Front Page</h2>
+                </div>
+                <img src="https://i.ibb.co/gZ82KcMt/webpagefrontsepsis.jpg" alt="webpagefrontsepsis" class="w-full h-auto rounded-lg mt-4" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/e2e8f0/1e40af?text=Image+Not+Found';">
+            </div>
+
+            <!-- Output Image -->
+            <div id="output" class="content-section md:col-span-2 p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+                <div class="flex items-center mb-3">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge"><path d="m12 14v10"/><path d="m12 14c-4 0-8-4-8-8"/><path d="M12 14c4 0 8-4 8-8"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Output</h2>
+                </div>
+                <img src="https://i.ibb.co/HDV5zH5D/outputsepsis.jpg" alt="outputsepsis" class="w-full h-auto rounded-lg mt-4" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/e2e8f0/1e40af?text=Image+Not+Found';">
+            </div>
+            
+            <!-- Patient Readings Image -->
+            <div id="patient-readings" class="content-section md:col-span-2 p-6 bg-slate-50 rounded-xl shadow-md border-l-4 border-sky-500">
+                <div class="flex items-center mb-3">
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-pulse"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.2 13H7l2.1-4.7 3.1 7.4L15 11h3.7"/></svg>
+                    <h2 class="text-2xl font-bold text-slate-800">Patient Readings</h2>
+                </div>
+                <img src="https://i.ibb.co/JFW3sKpK/patientreadingssepsis.jpg" alt="patientreadingssepsis" class="w-full h-auto rounded-lg mt-4" onerror="this.onerror=null;this.src='https://placehold.co/1200x400/e2e8f0/1e40af?text=Image+Not+Found';">
+            </div>
         </div>
-
     </main>
-    
+
+    <script>
+        // JavaScript to handle the interactive sections
+        function showSection(sectionId) {
+            // Get all content sections
+            const sections = document.querySelectorAll('.content-section');
+            
+            sections.forEach(section => {
+                // If the section is the one we want to show, toggle its active class
+                if (section.id === sectionId) {
+                    section.classList.toggle('active');
+                } else {
+                    // Hide all other sections
+                    section.classList.remove('active');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
